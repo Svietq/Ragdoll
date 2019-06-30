@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Ragdoll.gd" type="Script" id=1]
+[ext_resource path="res://Camera.gd" type="Script" id=2]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Body.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Body.gd" type="Script" id=5]
+[ext_resource path="res://Leg.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Head.tscn" type="PackedScene" id=7]
+
+[node name="Ragdoll" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.0521455, 0.531142, -0.845677, -0.0214207, 0.847229, 0.530796, 0.99841, -0.00956363, 0.0555566, -13.6913, -0.68567, 0.15536 )
+script = ExtResource( 2 )
+
+[node name="Floor" parent="." instance=ExtResource( 3 )]
+
+[node name="Torso" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.28137, 0 )
+script = ExtResource( 5 )
+
+[node name="PinJoint" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.887347, -0.789476 )
+nodes/node_a = NodePath("../Torso")
+nodes/node_b = NodePath("../Leg")
+
+[node name="Leg" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, -2.10271, -1.52899 )
+script = ExtResource( 5 )
+
+[node name="PinJoint2" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, -3.19774, -2.21426 )
+nodes/node_a = NodePath("../Leg")
+nodes/node_b = NodePath("../Leg2")
+
+[node name="Leg2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.89512, 0.445827, 0, -0.445827, 0.89512, -0.0148268, -4.26134, -1.66786 )
+script = ExtResource( 5 )
+
+[node name="PinJoint3" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, -0.872206, 0.830507 )
+nodes/node_a = NodePath("../Torso")
+nodes/node_b = NodePath("../Leg3")
+
+[node name="Leg3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.818612, 0.574348, 0, -0.574348, 0.818612, -0.0148268, -2.10271, 1.62393 )
+script = ExtResource( 5 )
+
+[node name="PinJoint4" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, -3.2609, 2.26223 )
+nodes/node_a = NodePath("../Leg3")
+nodes/node_b = NodePath("../Leg4")
+
+[node name="Leg4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.793031, -0.609181, 0, 0.609181, 0.793031, -0.0148268, -4.12728, 1.55673 )
+script = ExtResource( 5 )
+
+[node name="PinJoint5" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, 2.49386, -0.650036 )
+nodes/node_a = NodePath("../Torso")
+nodes/node_b = NodePath("../Arm")
+
+[node name="Arm" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.793031, -0.609181, 0, 0.609181, 0.793031, -0.0148268, 1.44493, -1.5979 )
+script = ExtResource( 5 )
+
+[node name="PinJoint6" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, 2.49386, 0.684977 )
+nodes/node_a = NodePath("../Torso")
+nodes/node_b = NodePath("../Arm2")
+
+[node name="Arm2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 0.694363, 0.719626, 0, -0.719626, 0.694363, -0.0148268, 1.51753, 1.84177 )
+script = ExtResource( 5 )
+
+[node name="Head" parent="." instance=ExtResource( 7 )]
+script = ExtResource( 5 )
+
+[node name="PinJoint7" type="PinJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.847493, -0.530807, 0, 0.530807, 0.847493, -0.0148268, 2.92503, -0.116793 )
+nodes/node_a = NodePath("../Torso")
+nodes/node_b = NodePath("../Head")
+params/damping = 0.43
+
